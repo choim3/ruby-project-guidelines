@@ -10,12 +10,12 @@ class Neighborhood < ActiveRecord::Base
 
   def self.most_offenses(amount)
     offense = Offense.group("neighborhood_name").order("count(neighborhood_name) DESC").limit(amount).to_a
-    puts " Neighborhood name: " + offense.map {|x| x.neighborhood_name}
+    puts offense.map {|x| x.neighborhood_name}
   end
 
   def self.least_offenses(amount)
     offense = Offense.group("neighborhood_name").order("count(neighborhood_name) ASC").limit(amount).to_a
-    puts offense.map {|x| x.neighborhood_name}.first
+    puts offense.map {|x| x.neighborhood_name}
   end
 
   def self.list_of_crimes(string)
@@ -37,6 +37,7 @@ class Neighborhood < ActiveRecord::Base
             end
         end
     end
+end
 
 
     # def self.most_offense
@@ -59,4 +60,3 @@ class Neighborhood < ActiveRecord::Base
       #   puts "Neighborhood Name: " + neighborhood_name
       #   puts "List of crimes commited: " + self.list_of_crimes(neighborhood_name).join(', ')
       # end
-end
